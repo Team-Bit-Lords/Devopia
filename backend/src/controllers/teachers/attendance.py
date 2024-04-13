@@ -8,7 +8,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 def update_attendance():
     email = get_jwt_identity()
     student_email = request.get_json()["email"]
-    attendance = request.get_json()["attendance"]
+    status = request.get_json()["status"]
     date = request.get_json()["date"]
     exist_teacher = db.teachers.find_one({"email": email})
     exist_student = db.students.find_one({"email": student_email})
@@ -18,8 +18,8 @@ def update_attendance():
         db.students.update_one({ "email": student_email }, {
             "$push": {
                 "attendance": {
-                    "date": date,
-                    "status": attendance
+                    "date": date.split("T")[0],
+                    "status": status
                 }
             }
         })
