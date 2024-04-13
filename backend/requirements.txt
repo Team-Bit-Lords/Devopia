@@ -8,3 +8,4 @@ langchain
 faiss-cpu
 langchain-google-genai
 cohere
+PyPDF2
