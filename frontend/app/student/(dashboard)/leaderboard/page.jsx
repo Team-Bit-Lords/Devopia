@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { useRouter } from "next/navigation";
 
@@ -112,13 +112,29 @@ const Page = () => {
           Rank:{" "}
           <span className="text-blue-500 font-semibold">{Data?.rank}</span>
         </div>
-        <button className="p-2 px-4 bg-blue-500 rounded-lg text-white" onClick={()=>{router.push('/student/redeem')}}>Redeem</button>
+        <button
+          className="p-2 px-4 bg-blue-500 rounded-lg text-white"
+          onClick={() => {
+            router.push("/student/redeem");
+          }}
+        >
+          Redeem
+        </button>
       </div>
       <div className="w-full h-[90%] rounded-lg border border-gray-200 bg-white shadow-sm overflow-y-scroll">
         <div className="grid w-full grid-cols-3 items-center p-4">
           <div className="font-semibold">Rank</div>
           <div className="font-semibold">User</div>
-          <div className="font-semibold text-right">Score</div>
+          <div
+            className="font-semibold text-right"
+            onClick={() => {
+              let msg = new SpeechSynthesisUtterance();
+              msg.text = "Hello World";
+              window.speechSynthesis.speak(msg);
+            }}
+          >
+            Score
+          </div>
         </div>
         <div className="divide-y">
           {sortedStudents.map((student, index) => (
