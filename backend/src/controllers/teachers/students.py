@@ -12,5 +12,5 @@ def get_students():
         return ApiError(404, "No such user exists").json
     else:
         all_students = db.students.find({}, {"_id": 0})
-        print(all_students)
-        return ApiResponse(200, list(all_students)).json # type: ignore
+        all_students = [student for student in all_students]
+        return ApiResponse(200, all_students).json # type: ignore
