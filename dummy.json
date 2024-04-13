@@ -44,12 +44,12 @@
       {
         "id": "",
         "subject": "",
-        "topic": 1,
+        "topic": "1",
         "quiz": [
           {
-            "que": "",
-            "ans": "",
-            "daala hua": ""
+            "question": "",
+            "answered": "",
+            "correct": ""
           }
         ]
       }

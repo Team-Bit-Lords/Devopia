@@ -5,18 +5,17 @@ from ...utils.ApiError import ApiError
 from flask_jwt_extended import get_jwt_identity
 
 
-def get_quiz():
-    quiz_id = request.get_json()["quiz_id"]
+def attendance():
     email = get_jwt_identity()
     existUser = db.students.find_one({"email": email})
     if not existUser:
         return ApiError(404, "No such user exists").json
-    elif existUser and existUser["class"] is not None:
-        quiz = [quiz for quiz in existUser["quizzes"] if quiz["id"] == quiz_id]
+    elif "attendance" in existUser:
+        attendance_days = (len([day for day in existUser["attendance"]
+                           if day["status"] == "present"]) / len(existUser["attendance"])) * 100
+
         response = {
-            "quiz": quiz
+            "attendance": attendance_days
         }
         return ApiResponse(200, response).json
-    else:
-        return ApiError(500, "There was some error with the server").json
-
+    return ApiError(500, "There was some error with the server").json
