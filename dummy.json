@@ -1,12 +1,58 @@
-{
-  "classes": {
-    "id": "",
-    "class": 1,
-    "courses": [
-        {
+[
+  {
+    "classes": [
+      {
+        "id": "",
+        "class": 1,
+        "courses": [
+          {
             "name": "science",
             "videos": []
-        }
+          }
+        ]
+      },
+      {
+        "id": "",
+        "class": 10,
+        "courses": [
+          {
+            "name": "science",
+            "videos": [
+              {
+                "topic": "",
+                "video": "",
+                "description": ""
+              }
+            ]
+          },
+          {
+            "name": "maths",
+            "videos": [
+              {
+                "topic": "",
+                "video": "",
+                "description": ""
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "quizzes": [
+      {
+        "id": "",
+        "subject": "",
+        "topic": 1,
+        "quiz": [
+          {
+            "que": "",
+            "ans": "",
+            "daala hua": ""
+          }
+        ]
+      }
     ]
   }
-}
+]
