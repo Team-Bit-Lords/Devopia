@@ -3,7 +3,7 @@ from ...db.connection import db
 from ...utils.ApiResponse import ApiResponse
 from ...utils.ApiError import ApiError
 from flask_jwt_extended import get_jwt_identity, jwt_required
-
+import uuid
 @jwt_required()
 def add_assignments():
     email = get_jwt_identity()
@@ -19,6 +19,7 @@ def add_assignments():
             "due_date": body["due_date"],
             "name": body["name"],
             "description": body["description"],
+            "id": uuid.uuid4().hex,
             "uploaded": []  
         })
         return ApiResponse(200, None).json
@@ -26,12 +27,11 @@ def add_assignments():
 @jwt_required()
 def get_assignments():
     email = get_jwt_identity()
-    print(email)
     exist_teacher = db.teachers.find_one({"email": email})
     if not exist_teacher:
         return ApiError(404, "No such user exists").json
     else:
-        assignments = db.assignments.find({"teacher": email}, {"_id": 0})
+        assignments = db.assignments.find({"teacher": exist_teacher["name"]}, {"_id": 0})
         response = {
             "assignments": [assignment for assignment in assignments]
         }
