@@ -36,7 +36,6 @@ const AssignmentsPage = () => {
   };
   useEffect(() => {
     const token = localStorage.getItem("token");
-    print(token);
     const fetchData = async () => {
       const response = await axios.get(
         "http://localhost:5000/api/teacher/get_assignments",
