@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -8,12 +8,12 @@ const TeacherLogin = () => {
   return (
     <section class="bg-white">
       <div class="grid grid-cols-1 lg:grid-cols-2 h-screen">
+        
         <div class="relative flex items-end px-4 pb-10 pt-60 sm:pb-16 md:justify-center lg:pb-24 bg-gray-50 sm:px-6 lg:px-8">
           <div class="absolute inset-0">
             <img
               class="object-cover object-top w-full h-full"
               src="https://skill.samsodisha.gov.in/studentmanagement/img/diplomacart.png"
-
               alt=""
             />
           </div>
@@ -113,6 +113,25 @@ const TeacherLogin = () => {
 
         <div class="flex items-center justify-center px-4 py-10 bg-white sm:px-6 lg:px-8 sm:py-16 lg:py-24">
           <div class="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto">
+          <div className="mb-10 w-6 cursor-pointer hover:scale-[1.2] transition-[scale_ease_in_out_400ms]" onClick={()=>router.push('/')}>
+              <svg
+                class="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="Black"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M5 12h14M5 12l4-4m-4 4 4 4"
+                />
+              </svg>
+            </div>
             <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl mb-4">
               Sign in As a Student
             </h2>
@@ -154,7 +173,10 @@ const TeacherLogin = () => {
 
                 <div>
                   <div class="flex items-center justify-between">
-                    <label htmlFor="" class="text-base font-medium text-gray-900">
+                    <label
+                      htmlFor=""
+                      class="text-base font-medium text-gray-900"
+                    >
                       {" "}
                       Password{" "}
                     </label>
@@ -207,16 +229,13 @@ const TeacherLogin = () => {
                 <div className=" ">
                   <button
                     className="text-semibold "
-                    onClick={() => router.push('/teacher/login')}
-
+                    onClick={() => router.push("/teacher/login")}
                   >
-                    Login As a <span className="text-blue-700">Student?</span>
+                    Login As a <span className="text-blue-700">Teacher?</span>
                   </button>
                 </div>
               </div>
             </htmlForm>
-
-
           </div>
         </div>
       </div>
