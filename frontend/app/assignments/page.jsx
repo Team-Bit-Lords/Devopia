@@ -220,7 +220,7 @@ const AssignmentsPage = () => {
                           <h3 className="font-bold text-lg">
                             Upload Assignment
                           </h3>
-                          <div>
+                          <div className="mt-4">
                             <input
                               type="text"
                               placeholder="Type here"

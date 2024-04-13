@@ -20,7 +20,7 @@ const AssignmentsPage = () => {
   const [assignments, setAssignments] = useState([]);
   const router = useRouter();
   const pathname = usePathname();
-  console.log(pathname)
+  console.log(pathname);
   const [date, setDate] = useState(new Date());
   const [formData, setFormData] = useState({
     topic: "",
@@ -84,12 +84,14 @@ const AssignmentsPage = () => {
         <div className="flex justify-center items-center text-xl font-semibold">
           Assignments
         </div>
-        <button
-          className="btn btn-primary"
-          onClick={() => document.getElementById("my_modal_3").showModal()}
-        >
-          Add Assignment
-        </button>
+        {pathname && pathname.includes("teacher") && (
+          <button
+            className="btn btn-primary"
+            onClick={() => document.getElementById("my_modal_3").showModal()}
+          >
+            Add Assignment
+          </button>
+        )}
         <dialog id="my_modal_3" className="modal">
           <div className="modal-box h-[600px]">
             <form method="dialog">
@@ -153,12 +155,14 @@ const AssignmentsPage = () => {
                 name="description"
               />
             </div>
-            {!pathname || !pathname.includes("teacher") ? (
+            {pathname && pathname.includes("teacher") ? (
               <button className="btn mt-8" onClick={add_assignment}>
                 {" "}
                 Add Assignment
               </button>
-            ): (<></>)}
+            ) : (
+              <></>
+            )}
           </div>
         </dialog>
       </div>
@@ -222,7 +226,8 @@ const AssignmentsPage = () => {
                           </h3>
                           <div>
                             <input
-                              type="text"
+                              type="file"
+                              accept=".pdf"
                               placeholder="Type here"
                               className="input input-bordered w-full max-w-lg"
                               onChange={onChange}
