@@ -15,9 +15,9 @@ def signup():
             "name": body["name"],
             "email": body["email"],
             "class": body["class"],
-            "password": hashedPassword
+            "password": hashedPassword,
+            "points": 0
         }
-        print(type(user))
         db.students.insert_one(user)
         return ApiResponse(200, None).json
     return ApiError(200, "Email id already exists").json

@@ -1,3 +1,4 @@
+import os
 from flask import request
 from ...db.connection import db
 from ...utils.ApiResponse import ApiResponse
@@ -8,8 +9,8 @@ from langchain.embeddings.cohere import CohereEmbeddings
 from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferWindowMemory
 import PyPDF2
-import os
-
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
 
 def chatbot():
     subject = request.get_json()["subject"]

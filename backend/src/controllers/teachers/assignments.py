@@ -2,9 +2,9 @@ from flask import request
 from ...db.connection import db
 from ...utils.ApiResponse import ApiResponse
 from ...utils.ApiError import ApiError
-from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import get_jwt_identity, jwt_required
 
-
+@jwt_required()
 def add_assignments():
     email = get_jwt_identity()
     body = request.get_json()
@@ -22,7 +22,7 @@ def add_assignments():
         })
         return ApiResponse(200, None).json
 
-
+@jwt_required()
 def get_assignments():
     email = get_jwt_identity()
     exist_teacher = db.teachers.find_one({"email": email})

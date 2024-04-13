@@ -19,6 +19,7 @@ def quiz_submit():
     if "quizzes" in existUser:
         for quiz in existUser["quizzes"]:
             if quiz["id"] == str(quiz_id):
+                points_increase = 10 if body["correct"] == body["answer"] else 0
                 db.students.update_one({"email": email, "quizzes.id": str(quiz_id) }, {
                     "$push": {
                         "quizzes.$.quiz": {
@@ -26,8 +27,10 @@ def quiz_submit():
                             "answer": body["answer"],
                             "options": body["options"],
                             "correct": body["correct"]
-                        
                         }
+                    },
+                    "$inc": {
+                        "points": points_increase
                     }
                 })
                 return ApiResponse(200, None).json
