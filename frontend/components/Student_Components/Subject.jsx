@@ -2,22 +2,24 @@ import React from "react";
 
 const Subject = () => {
   return (
-    <div className="col-12 col-md-6 col-xl-4 text-center mb-12 mb-md-0">
-      <a
-        className="d-block text-decoration-none mw-md fw-medium text-start lh-base"
-        href="#"
-      >
+    <div className="w-64">
+      <a href="#" title className="block aspect-w-4 aspect-h-3">
         <img
-          className="d-block mb-6 w-80 img-fluid"
-          src="https://shuffle.dev/flaro-assets/images/blog/blog-wide.png"
+          className="object-cover w-full h-full"
+          src="https://www.euroschoolindia.com/wp-content/uploads/2023/10/advantages-of-taking-science-jpg.webp"
           alt
         />
-        <div className="mw-xs">
-          <span className="d-inline-block mb-4 py-1 px-2 fs-9 text-blue-600 font-semibold text-uppercase bg-blue-100 rounded">
-            Science
-          </span>
-        </div>
       </a>
+      <span className="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full text-rose-500 bg-rose-100 mt-2">
+        {" "}
+        Science{" "}
+      </span>
+      <p className="mt-2 text-xl font-semibold">
+        <a href="#" title className="text-black">
+          {" "}
+          How to mange your remote team?{" "}
+        </a>
+      </p>
     </div>
   );
 };
