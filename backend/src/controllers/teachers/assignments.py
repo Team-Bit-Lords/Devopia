@@ -36,3 +36,16 @@ def get_assignments():
             "assignments": [assignment for assignment in assignments]
         }
         return ApiResponse(200, response).json
+    
+@jwt_required()
+def get_uploaded(assignment_id):
+    email = get_jwt_identity()
+    existUser = db.teachers.find_one({"email": email})
+    if not existUser:
+        return ApiError(404, "No such user exists").json
+    else:
+        assignments = db.assignments.find({ "teacher": existUser["name"] }, { "_id": 0 })
+        response = {
+            "uploaded": [assignment for assignment in assignments if assignment["id"] == assignment_id][0]["uploaded"]
+        }
+        return ApiResponse(200, response).json
