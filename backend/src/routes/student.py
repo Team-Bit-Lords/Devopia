@@ -1,6 +1,6 @@
 from flask import Blueprint
-from ..controllers.students import login
-from ..controllers.students import signup
+from ..controllers.students.login import login
+from ..controllers.students.signup import signup
 
 student = Blueprint("student", __name__, url_prefix="/student")
 

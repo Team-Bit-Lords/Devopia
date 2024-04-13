@@ -10,10 +10,10 @@ from .routes.router import router
 
 app.register_blueprint(router)
 
-@app.errorhandler(HTTPException)
-def handleHttpException(error):
-    return ApiError(error.code, error.description).json
+# @app.errorhandler(HTTPException)
+# def handleHttpException(error):
+#     return ApiError(error.code, error.description).json
 
-@app.errorhandler(Exception)
-def handleException(error):
-    return ApiError(200, error.__doc__).json
+# @app.errorhandler(Exception)
+# def handleException(error):
+#     return ApiError(200, error.__doc__).json

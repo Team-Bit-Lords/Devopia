@@ -12,10 +12,10 @@ def signup():
         hashedPassword = bcrypt.generate_password_hash(
             body["password"]).decode()
         user = {
-            body["name"],
-            body["email"],
-            hashedPassword
+            "name": body["name"],
+            "email": body["email"],
+            "password": hashedPassword
         }
-        db.teachers.insert_one(user.__dict__)
+        db.teachers.insert_one(user)
         return ApiResponse(200, None).json
     return ApiError(200, "Email id already exists").json
