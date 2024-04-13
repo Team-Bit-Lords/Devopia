@@ -12,7 +12,7 @@ const NavLinks = () => {
       {links.map((link) => {
         return (
           <li key={link.href}>
-            <Link href={`/teacher/${link.href}`} className="capitalize">
+            <Link href={`/teacher${link.href}`} className="capitalize">
               {link.label}
             </Link>
           </li>
