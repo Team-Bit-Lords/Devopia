@@ -36,7 +36,6 @@ const AssignmentsPage = () => {
   };
   useEffect(() => {
     const token = localStorage.getItem("token");
-    print(token);
     const fetchData = async () => {
       const response = await axios.get(
         "http://localhost:5000/api/teacher/get_assignments",
@@ -50,7 +49,7 @@ const AssignmentsPage = () => {
       if (response?.data) {
         setAssignments(response?.data?.body?.assignments);
         console.log("first");
-        document.getElementById("my_modal_3").close();
+        // document.getElementById("my_modal_3").close();
       }
     };
     fetchData();
@@ -220,7 +219,7 @@ const AssignmentsPage = () => {
                           <h3 className="font-bold text-lg">
                             Upload Assignment
                           </h3>
-                          <div>
+                          <div className="mt-4">
                             <input
                               type="text"
                               placeholder="Type here"

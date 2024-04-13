@@ -265,7 +265,7 @@ const TeacherLogin = () => {
                     Log in
                   </button>
                 </div>
-                <div className=" ">
+                <div className="">
                   <button
                     className="text-semibold "
                     onClick={() => router.push("/teacher/login")}

@@ -20,7 +20,7 @@ const AssignmentsPage = () => {
   const [assignments, setAssignments] = useState([]);
   const router = useRouter();
   const pathname = usePathname();
-  console.log(pathname)
+  console.log(pathname);
   const [date, setDate] = useState(new Date());
   const [formData, setFormData] = useState({
     topic: "",
@@ -36,7 +36,6 @@ const AssignmentsPage = () => {
   };
   useEffect(() => {
     const token = localStorage.getItem("token");
-    print(token);
     const fetchData = async () => {
       const response = await axios.get(
         "http://localhost:5000/api/teacher/get_assignments",
@@ -81,24 +80,26 @@ const AssignmentsPage = () => {
   return (
     <div>
       <div className="flex justify-between">
-        <div className="flex justify-center items-center text-xl font-semibold">
+        <div className="flex items-center justify-center text-xl font-semibold">
           Assignments
         </div>
-        <button
-          className="btn btn-primary"
-          onClick={() => document.getElementById("my_modal_3").showModal()}
-        >
-          Add Assignment
-        </button>
+        {pathname && pathname.includes("teacher") && (
+          <button
+            className="btn btn-primary"
+            onClick={() => document.getElementById("my_modal_3").showModal()}
+          >
+            Add Assignment
+          </button>
+        )}
         <dialog id="my_modal_3" className="modal">
           <div className="modal-box h-[600px]">
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
                 ✕
               </button>
             </form>
-            <h3 className="font-bold text-lg">Add Assignment</h3>
+            <h3 className="text-lg font-bold">Add Assignment</h3>
             <div className="flex flex-col gap-2 mt-8">
               <span className="label-text">Due Date</span>
               <Popover>
@@ -111,7 +112,7 @@ const AssignmentsPage = () => {
                     )}
                   >
                     {date ? format(date, "PPP") : <span>Pick a date</span>}
-                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                    <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
@@ -130,7 +131,7 @@ const AssignmentsPage = () => {
               <input
                 type="text"
                 placeholder="Type here"
-                className="input input-bordered w-full max-w-lg"
+                className="w-full max-w-lg input input-bordered"
                 onChange={onChange}
                 name="subject"
               />
@@ -139,7 +140,7 @@ const AssignmentsPage = () => {
               <input
                 type="text"
                 placeholder="Type here"
-                className="input input-bordered w-full max-w-lg"
+                className="w-full max-w-lg input input-bordered"
                 onChange={onChange}
                 name="topic"
               />
@@ -153,45 +154,47 @@ const AssignmentsPage = () => {
                 name="description"
               />
             </div>
-            {!pathname || !pathname.includes("teacher") ? (
-              <button className="btn mt-8" onClick={add_assignment}>
+            {pathname && pathname.includes("teacher") ? (
+              <button className="mt-8 btn" onClick={add_assignment}>
                 {" "}
                 Add Assignment
               </button>
-            ): (<></>)}
+            ) : (
+              <></>
+            )}
           </div>
         </dialog>
       </div>
       {assignments.map((assignment, index) => {
         return (
           <div className="my-2" key={index}>
-            <div className="group mx-2 mt-5 grid max-w-screen-md grid-cols-12 space-x-8 overflow-hidden rounded-lg border py-8 text-gray-700 shadow transition hover:shadow-lg sm:mr-auto">
+            <div className="grid max-w-screen-md grid-cols-12 py-8 mx-2 mt-5 space-x-8 overflow-hidden text-gray-700 transition border rounded-lg shadow group hover:shadow-lg sm:mr-auto">
               <a
                 href="#"
-                className="order-2 col-span-1 mt-4 -ml-14 text-left text-gray-600 hover:text-gray-700 sm:-order-1 sm:ml-4"
+                className="order-2 col-span-1 mt-4 text-left text-gray-600 -ml-14 hover:text-gray-700 sm:-order-1 sm:ml-4"
               >
-                <div className="group relative h-16 w-16 overflow-hidden rounded-lg">
+                <div className="relative w-16 h-16 overflow-hidden rounded-lg group">
                   <Image
                     src={image}
                     alt=""
-                    className="h-full w-full object-cover text-gray-700"
+                    className="object-cover w-full h-full text-gray-700"
                   />
                 </div>
               </a>
-              <div className="col-span-11 flex flex-col pr-8 text-left sm:pl-4">
+              <div className="flex flex-col col-span-11 pr-8 text-left sm:pl-4">
                 <h3 className="text-sm text-gray-600">{assignment.subject}</h3>
                 <a
                   href="#"
-                  className="mb-3 overflow-hidden pr-7 text-lg font-semibold sm:text-xl"
+                  className="mb-3 overflow-hidden text-lg font-semibold pr-7 sm:text-xl"
                 >
                   {" "}
                   {assignment.name}
                 </a>
-                <p className="overflow-hidden pr-7 text-sm">
+                <p className="overflow-hidden text-sm pr-7">
                   {assignment.description}
                 </p>
 
-                <div className="mt-5 flex flex-col justify-between space-y-3 text-sm font-medium text-gray-500 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2">
+                <div className="flex flex-col justify-between mt-5 space-y-3 text-sm font-medium text-gray-500 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2">
                   <div className="">
                     Teacher:
                     <span className="ml-2 mr-3 rounded-full bg-green-100 px-2 py-0.5 text-green-900">
@@ -213,18 +216,19 @@ const AssignmentsPage = () => {
                         <div className="modal-box">
                           <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
-                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                            <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
                               ✕
                             </button>
                           </form>
-                          <h3 className="font-bold text-lg">
+                          <h3 className="text-lg font-bold">
                             Upload Assignment
                           </h3>
                           <div>
                             <input
-                              type="text"
+                              type="file"
+                              accept=".pdf"
                               placeholder="Type here"
-                              className="input input-bordered w-full max-w-lg"
+                              className="w-full max-w-lg input input-bordered"
                               onChange={onChange}
                               name="subject"
                             />
