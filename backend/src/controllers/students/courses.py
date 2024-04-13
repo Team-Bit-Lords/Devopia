@@ -15,7 +15,7 @@ def courses_name():
 
         return_courses = []
         for course in user_class["courses"]:  # type: ignore
-            return_courses.append(course["name"])
+            return_courses.append({"name": course["name"], "url": course["image"]})
         return ApiResponse(200, return_courses).json
     
     return ApiError(500, "There was some error with the server").json
