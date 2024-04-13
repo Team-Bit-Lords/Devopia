@@ -11,9 +11,16 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
+import image from "@/public/assignment.jpeg";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const AssignmentsPage = () => {
   const [assignments, setAssignments] = useState([]);
+  const router = useRouter();
+  const pathname = usePathname();
+  console.log(pathname);
   const [date, setDate] = useState(new Date());
   const [formData, setFormData] = useState({
     topic: "",
@@ -40,8 +47,11 @@ const AssignmentsPage = () => {
         }
       );
       console.log(response.data.body.assignments);
-      if (response.status === 200) setAssignments(response?.data?.body?.assignments);
-      else setAssignments([]);
+      if (response?.data) {
+        setAssignments(response?.data?.body?.assignments);
+        console.log("first");
+        document.getElementById("my_modal_3").close();
+      }
     };
     fetchData();
   }, []);
@@ -63,9 +73,9 @@ const AssignmentsPage = () => {
       }
     );
     if (response.status === 200) {
-      setAssignments([...assignments, response.data.body.assignment]);
+      console.log(response.data.body)
+      // setAssignments([...assignments, response.data.body.assignments]);
     } else {
-
     }
   };
   return (
@@ -140,7 +150,7 @@ const AssignmentsPage = () => {
                 placeholder="Type here"
                 className="input input-bordered w-full max-w-lg h-[120px]"
                 onChange={onChange}
-                name="subject"
+                name="description"
               />
             </div>
             <button className="btn mt-8" onClick={add_assignment}>
@@ -150,9 +160,8 @@ const AssignmentsPage = () => {
           </div>
         </dialog>
       </div>
-      {assignments &&
-        assignments.length > 0 &&
-        assignments.map((assignment, index) => {
+      {assignments.map((assignment, index) => {
+        return (
           <div className="my-2" key={index}>
             <div className="group mx-2 mt-5 grid max-w-screen-md grid-cols-12 space-x-8 overflow-hidden rounded-lg border py-8 text-gray-700 shadow transition hover:shadow-lg sm:mr-auto">
               <a
@@ -160,8 +169,8 @@ const AssignmentsPage = () => {
                 className="order-2 col-span-1 mt-4 -ml-14 text-left text-gray-600 hover:text-gray-700 sm:-order-1 sm:ml-4"
               >
                 <div className="group relative h-16 w-16 overflow-hidden rounded-lg">
-                  <img
-                    src=""
+                  <Image
+                    src={image}
                     alt=""
                     className="h-full w-full object-cover text-gray-700"
                   />
@@ -180,25 +189,36 @@ const AssignmentsPage = () => {
                   {assignment.description}
                 </p>
 
-                <div className="mt-5 flex flex-col space-y-3 text-sm font-medium text-gray-500 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2">
+                <div className="mt-5 flex flex-col justify-between space-y-3 text-sm font-medium text-gray-500 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2">
                   <div className="">
-                    Experience:
+                    Teacher:
                     <span className="ml-2 mr-3 rounded-full bg-green-100 px-2 py-0.5 text-green-900">
                       {" "}
-                      2 Years{" "}
+                      {assignment.teacher}
                     </span>
                   </div>
-                  <div className="">
-                    Salary:
-                    <span className="ml-2 mr-3 rounded-full bg-blue-100 px-2 py-0.5 text-blue-900">
-                      180-250k
-                    </span>
-                  </div>
+                  {!pathname || !pathname.includes("teacher") ? (
+                    <button className="btn btn-primary">
+                      Upload Assignment
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-primary"
+                      onClick={() =>
+                        router.push(
+                          `/teacher/assignments/${assignment.id}`
+                        )
+                      }
+                    >
+                      View Assignment
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
-          </div>;
-        })}
+          </div>
+        );
+      })}
     </div>
   );
 };
