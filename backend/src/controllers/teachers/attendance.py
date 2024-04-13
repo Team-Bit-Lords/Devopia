@@ -2,9 +2,9 @@ from flask import request
 from ...db.connection import db
 from ...utils.ApiResponse import ApiResponse
 from ...utils.ApiError import ApiError
-from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import get_jwt_identity, jwt_required
 
-
+@jwt_required()
 def update_attendance():
     email = get_jwt_identity()
     student_email = request.get_json()["email"]

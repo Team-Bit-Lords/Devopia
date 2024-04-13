@@ -22,4 +22,3 @@ def upload_assignments():
             }
         })
         return ApiResponse(200, None).json
-    return ApiError(500, "There was some error with the server").json
