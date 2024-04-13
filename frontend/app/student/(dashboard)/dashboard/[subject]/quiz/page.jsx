@@ -9,13 +9,23 @@ const Page = () => {
   const [showInfoBox, setShowInfoBox] = useState(false);
   const [showQuizBox, setShowQuizBox] = useState(false);
   const [showResultBox, setShowResultBox] = useState(false);
-  const handleQuiz = () => {
+
+  const [quizz, setQuiz] = useState({
+    topic: "",
+    subject: "",
+    quiz: [],
+  });
+
+  const handleQuiz = async () => {
+    const response = await axios
+      .post("http://127.0.0.1:5000/api/student/fetch_quiz", {
+        subject: params.subject,
+      })
+      .then((res) => res.data);
+
+    setQuiz(response);
     setShowInfoBox(false);
     setShowQuizBox(true);
-    
-    axios.post("/api/quiz", {
-      subject: params.subject,
-    });
   };
 
   return (
@@ -76,7 +86,14 @@ const Page = () => {
       {/* Quiz Box */}
       {showQuizBox && (
         <div className=" h-full bg-white rounded-lg shadow-xl p-6 ">
-          {/* Add Quiz Box content here */}
+          {quizz.quiz.map((quizdata, index) => (
+            <div key={index}>
+              <p>{quizdata.quiz}</p>
+              <div>
+                <p>{quizdata.quiz}</p>
+              </div>
+            </div>
+          ))}
         </div>
       )}
 

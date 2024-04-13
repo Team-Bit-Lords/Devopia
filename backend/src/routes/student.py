@@ -4,7 +4,7 @@ from ..controllers.students.signup import signup
 from ..controllers.students.courses import courses_name
 from ..controllers.students.subject_wise import subject_wise_videos, subject_wise_quizzes
 from ..controllers.students.quiz_submit import quiz_submit
-from ..controllers.students.fetch_quiz import previous_quizzes
+from ..controllers.students.fetch_quiz import previous_quizzes, get_subject_quiz
 from ..controllers.students.chatbot import chatbot
 from ..controllers.students.attendance import attendance
 from ..controllers.students.assignments import upload_assignments
@@ -21,3 +21,5 @@ student.add_url_rule("/previous_quizzes", view_func=previous_quizzes, methods=["
 student.add_url_rule("/chatbot", view_func=chatbot, methods=["POST"])
 student.add_url_rule("/attendance", view_func=attendance, methods=["GET"])
 student.add_url_rule("/upload_assignment", view_func=upload_assignments, methods=["POST"])
+student.add_url_rule("/fetch_quiz", view_func=get_subject_quiz, methods=["POST"])
+
