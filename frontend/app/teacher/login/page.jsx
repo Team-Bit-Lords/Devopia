@@ -4,21 +4,40 @@ import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const TeacherLogin = () => {
 
-  const [student, setStudent] = useState({
+  const [teacher, setTeacher] = useState({
     email: "",
     password: "",
   });
 
   const handleChange = (e) => {
-    setStudent({ ...student, [e.target.name]: e.target.value });
+    setTeacher({ ...teacher, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async(e) => {
     e.preventDefault();
-    console.log(student);
+    console.log(teacher);
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/teacher/login",
+        teacher
+      );
+      if (res.data.message === "success") {
+        localStorage.setItem("token", JSON.stringify(res.token));
+        toast.success("Login Successful");
+        router.push("/teacher/dashboard");
+      } else {
+        console.log(res.data.message);
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Login Failed");
+    }
   };
 
 
@@ -129,7 +148,7 @@ const TeacherLogin = () => {
         </div>
 
         <div class="flex items-center justify-center px-4 py-10 bg-white sm:px-6 lg:px-8 sm:py-16 lg:py-24">
-          
+
           <div class="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto">
           <div className="mb-10 w-6 cursor-pointer hover:scale-[1.2] transition-[scale_ease_in_out_400ms]" onClick={()=>router.push('/')}>
               <svg
@@ -182,7 +201,7 @@ const TeacherLogin = () => {
                     <input
                       type="email"
                       name="email"
-                      value={student.email}
+                      value={teacher.email}
                       onChange={handleChange}
                       placeholder="Enter email to get started"
                       class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600"
@@ -230,7 +249,7 @@ const TeacherLogin = () => {
                     <input
                       type="password"
                       name="password"
-                      value={student.password}
+                      value={teacher.password}
                       onChange={handleChange}
                       placeholder="Enter your password"
                       class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600"
