@@ -33,7 +33,7 @@ conversation_chain = ConversationalRetrievalChain.from_llm(
 )
 
 
-def english_chatbot():
+def maths_chatbot():
     question = request.get_json()["question"]
     answer = conversation_chain({"question": question})
     return ApiResponse(200, answer["answer"]).json
