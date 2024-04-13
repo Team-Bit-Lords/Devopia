@@ -5,9 +5,10 @@ from ...utils.ApiError import ApiError
 from ...utils.serverUtil import bcrypt
 from flask_jwt_extended import create_access_token
 
+
 def login():
     body = request.get_json()
-    user = db.teachers.find_one({"email": body["email"],})
+    user = db.teachers.find_one({"email": body["email"], })
     if user and "password" in user:
         if bcrypt.check_password_hash(user["password"], body["password"]):
             token = create_access_token(identity=body["email"])

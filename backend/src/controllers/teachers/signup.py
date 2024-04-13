@@ -9,10 +9,11 @@ def signup():
     body = request.get_json()
     existUser = db.teachers.find_one({"email": body["email"]})
     if not existUser:
-        hashedPassword = bcrypt.generate_password_hash(body["password"]).decode()
+        hashedPassword = bcrypt.generate_password_hash(
+            body["password"]).decode()
         user = {
-            body["name"], 
-            body["email"], 
+            body["name"],
+            body["email"],
             hashedPassword
         }
         db.teachers.insert_one(user.__dict__)
