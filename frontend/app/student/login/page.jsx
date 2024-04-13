@@ -151,7 +151,7 @@ const TeacherLogin = () => {
           <div class="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto">
           <div className="mb-10 w-6 cursor-pointer hover:scale-[1.2] transition-[scale_ease_in_out_400ms]" onClick={()=>router.push('/')}>
               <svg
-                class="w-6 h-6 text-gray-800 dark:text-white"
+                class="w-6 h-6 text-gray-800"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

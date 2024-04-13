@@ -27,7 +27,7 @@ const TeacherLogin = () => {
         teacher
       );
       if (res.data.message === "success") {
-        localStorage.setItem("token", JSON.stringify(res.token));
+        localStorage.setItem("token", res.data.body.token);
         toast.success("Login Successful");
         router.push("/teacher/dashboard");
       } else {
