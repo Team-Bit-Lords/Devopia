@@ -7,7 +7,7 @@ from ...utils.serverUtil import bcrypt
 
 def signup():
     body = request.get_json()
-    existUser = db.students.find_one({"email": body["email"]})
+    existUser = db.teachers.find_one({"email": body["email"]})
     if not existUser:
         hashedPassword = bcrypt.generate_password_hash(body["password"]).decode()
         user = {
@@ -15,6 +15,6 @@ def signup():
             body["email"], 
             hashedPassword
         }
-        db.students.insert_one(user.__dict__)
+        db.teachers.insert_one(user.__dict__)
         return ApiResponse(200, None).json
     return ApiError(200, "Email id already exists").json
