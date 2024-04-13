@@ -2,13 +2,49 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 const TeacherLogin = () => {
+
+  const [student, setStudent] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setStudent({ ...student, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    console.log(student);
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/teacher/login",
+        student
+      );
+      console.log(res);
+      if (res.data.message === "success") {
+        localStorage.setItem("token", JSON.stringify(res.data.token));
+        toast.success("Login Success");
+        router.push("/student/dashboard");
+      } else {
+        console.log(res.data.message);
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Login Failed");
+    }
+  };
+
   const router = useRouter();
   return (
     <section class="bg-white">
       <div class="grid grid-cols-1 lg:grid-cols-2 h-screen">
-        
+
         <div class="relative flex items-end px-4 pb-10 pt-60 sm:pb-16 md:justify-center lg:pb-24 bg-gray-50 sm:px-6 lg:px-8">
           <div class="absolute inset-0">
             <img
@@ -163,8 +199,9 @@ const TeacherLogin = () => {
 
                     <input
                       type="email"
-                      name=""
-                      id=""
+                      name="email"
+                      value={student.email}
+                      onChange={handleChange}
                       placeholder="Enter email to get started"
                       class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600"
                     />
@@ -210,8 +247,9 @@ const TeacherLogin = () => {
 
                     <input
                       type="password"
-                      name=""
-                      id=""
+                      name="password"
+                      value={student.password}
+                      onChange={handleChange}
                       placeholder="Enter your password"
                       class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600"
                     />
@@ -221,6 +259,7 @@ const TeacherLogin = () => {
                 <div>
                   <button
                     type="submit"
+                    onClick={handleLogin}
                     class="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-md bg-gradient-to-r from-fuchsia-600 to-blue-600 focus:outline-none hover:opacity-80 focus:opacity-80"
                   >
                     Log in
