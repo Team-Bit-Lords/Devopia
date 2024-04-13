@@ -2,7 +2,7 @@ from flask import Flask
 from werkzeug.exceptions import HTTPException
 from .utils.ApiError import ApiError
 
-app = Flask(__name__)
+app = Flask(__name__) # type: ignore
 
 app.config.from_pyfile("config.py")
 

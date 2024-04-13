@@ -1,1 +1,1 @@
-DATABASE_NAME = "Database name"
+DATABASE_NAME = "devopia"
