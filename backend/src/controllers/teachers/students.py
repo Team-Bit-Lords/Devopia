@@ -11,8 +11,5 @@ def get_students():
     if not exist_teacher:
         return ApiError(404, "No such user exists").json
     else:
-        all_students = db.students.find({})
-        response = {
-            "students": all_students
-        }
-        return ApiResponse(200, response).json
+        all_students = db.students.find({}, {"_id": 0})
+        return ApiResponse(200, all_students).json
