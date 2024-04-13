@@ -22,7 +22,7 @@ const TeacherLogin = () => {
     console.log(student);
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/teacher/login",
+        "http://localhost:5000/api/student/login",
         student
       );
       console.log(res);
