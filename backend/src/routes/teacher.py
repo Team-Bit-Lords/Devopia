@@ -13,3 +13,4 @@ teacher.add_url_rule("/update_attendance", view_func=update_attendance, methods=
 teacher.add_url_rule("/add_assignment", view_func=add_assignments, methods=["POST"])
 teacher.add_url_rule("/get_assignments", view_func=get_assignments, methods=["GET"])
 teacher.add_url_rule("/get_students", view_func=get_students, methods=["GET"])
+teacher.add_url_rule("/get_")
