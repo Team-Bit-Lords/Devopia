@@ -1,0 +1,12 @@
+{
+  "classes": {
+    "id": "",
+    "class": 1,
+    "courses": [
+        {
+            "name": "science",
+            "videos": []
+        }
+    ]
+  }
+}

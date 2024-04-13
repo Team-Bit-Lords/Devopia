@@ -4,5 +4,5 @@ from ..controllers.teachers.signup import signup
 
 teacher = Blueprint("teacher", __name__, url_prefix="/teacher")
 
-teacher.add_url_rule("/login", view_func=login, methods=["POST"]) # type: ignore
-teacher.add_url_rule("/signup", view_func=signup, methods=["POST"]) # type: ignore
+teacher.add_url_rule("/login", view_func=login, methods=["POST"]) 
+teacher.add_url_rule("/signup", view_func=signup, methods=["POST"])

@@ -1,8 +1,9 @@
 import json
 from flask import Response
+from typing import Union
 
 class ApiResponse:
-    def __init__(self, status: int, data: dict | None, success: bool = True, message: str = "success"):
+    def __init__(self, status: int, data: Union[dict,  None], success: bool = True, message: str = "success"):
         self.response = {}
         self.response["status"] = status
         self.response["body"] = data
