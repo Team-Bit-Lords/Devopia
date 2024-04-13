@@ -3,8 +3,25 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const TeacherLogin = () => {
+
+  const [student, setStudent] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setStudent({ ...student, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log(student);
+  };
+
+
   const router = useRouter();
   return (
     <section class="bg-white">
@@ -144,8 +161,9 @@ const TeacherLogin = () => {
 
                     <input
                       type="email"
-                      name=""
-                      id=""
+                      name="email"
+                      value={student.email}
+                      onChange={handleChange}
                       placeholder="Enter email to get started"
                       class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600"
                     />
@@ -188,8 +206,9 @@ const TeacherLogin = () => {
 
                     <input
                       type="password"
-                      name=""
-                      id=""
+                      name="password"
+                      value={student.password}
+                      onChange={handleChange}
                       placeholder="Enter your password"
                       class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600"
                     />
@@ -199,6 +218,7 @@ const TeacherLogin = () => {
                 <div>
                   <button
                     type="submit"
+                    onClick={handleLogin}
                     class="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-md bg-gradient-to-r from-fuchsia-600 to-blue-600 focus:outline-none hover:opacity-80 focus:opacity-80"
                   >
                     Log in
