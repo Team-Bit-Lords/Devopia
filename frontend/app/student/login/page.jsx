@@ -22,7 +22,7 @@ const TeacherLogin = () => {
     console.log(student);
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/teacher/login",
+        "http://localhost:5000/api/student/login",
         student
       );
       console.log(res);
@@ -265,7 +265,7 @@ const TeacherLogin = () => {
                     Log in
                   </button>
                 </div>
-                <div className=" ">
+                <div className="">
                   <button
                     className="text-semibold "
                     onClick={() => router.push("/teacher/login")}
