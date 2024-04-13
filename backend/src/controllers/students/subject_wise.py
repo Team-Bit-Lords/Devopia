@@ -12,6 +12,7 @@ def subject_wise_videos():
         return ApiError(404, "No such user exists").json
     elif existUser and existUser["class"] is not None:
         user_class = db.courses.find_one({"class": existUser["class"]})
+
         all_videos = []
         for subject in user_class["courses"]:  # type: ignore
             for video in subject["videos"]:
@@ -20,10 +21,8 @@ def subject_wise_videos():
                     "video": video["video"],
                     "description": video["description"]
                 })
-        response = {
-            "videos": all_videos
-        }
-        return ApiResponse(200, response).json
+
+        return ApiResponse(200, all_videos).json
     else:
         return ApiError(500, "There was some error with the server").json
 
