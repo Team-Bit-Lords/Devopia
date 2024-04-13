@@ -1,6 +1,9 @@
+"use client"
 import React from "react";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  const router = useRouter();
   const students = [
     {
       name: "Elena Rodriguez",
@@ -81,7 +84,7 @@ const Page = () => {
   ];
   const sortedStudents = students.slice().sort((a, b) => b.score - a.score);
 
-  const shades = ["bg-yellow-300", "bg-yellow-200", "bg-yellow-100"];
+  const shades = ["bg-blue-300", "bg-blue-200", "bg-blue-100"];
 
   const getRankAndData = (studentName) => {
     const student = sortedStudents.find((s) => s.name === studentName);
@@ -109,7 +112,7 @@ const Page = () => {
           Rank:{" "}
           <span className="text-blue-500 font-semibold">{Data?.rank}</span>
         </div>
-        <button className="p-2 px-4 bg-blue-500 rounded-lg text-white">Redeem</button>
+        <button className="p-2 px-4 bg-blue-500 rounded-lg text-white" onClick={()=>{router.push('/student/redeem')}}>Redeem</button>
       </div>
       <div className="w-full h-[90%] rounded-lg border border-gray-200 bg-white shadow-sm overflow-y-scroll">
         <div className="grid w-full grid-cols-3 items-center p-4">
@@ -129,22 +132,22 @@ const Page = () => {
                 <div>{index + 1}</div>
                 {index == 0 && (
                   <div className="flex justify-center w-full">
-                    <div className="rounded-full bg-red-600 text-white w-12 h-full text-center">
-                      #1
+                    <div className="rounded-full bg-green-600 text-white w-12 h-full text-center font-bold">
+                      # 1
                     </div>
                   </div>
                 )}
                 {index == 1 && (
                   <div className="flex justify-center w-full">
-                    <div className="rounded-full bg-red-500 text-white w-12 h-full text-center">
-                      #2
+                    <div className="rounded-full bg-green-500 text-white w-12 h-full text-center font-bold">
+                      # 2
                     </div>
                   </div>
                 )}
                 {index == 2 && (
                   <div className="flex justify-center w-full">
-                    <div className="rounded-full bg-red-400 text-white w-12 h-full text-center">
-                      #3
+                    <div className="rounded-full bg-green-400 text-white w-12 h-full text-center font-bold">
+                      # 3
                     </div>
                   </div>
                 )}
