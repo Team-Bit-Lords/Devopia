@@ -15,7 +15,7 @@ def upload_assignments():
         db.assignments.update_one({ "name": body["name"] }, {
             "$push": {
                 "uploaded": {
-                    "email": body["email"],
+                    "email": email,
                     "name": body["student_name"],
                     "assignment": body["assignment"]
                 }

@@ -5,16 +5,19 @@ const links = [
   { href: "/leaderboard", label: "Leaderboard" },
   { href: "/chat", label: "Chatbot" },
   { href: "/redeem", label: "Redeem" },
+  { href: "/assignments", label: "Assignments" },
   { href: "/profile", label: "profile" },
 ];
 
 const NavLinks = () => {
+
+  
   return (
     <ul className="menu text-base-content">
       {links.map((link) => {
         return (
           <li key={link.href}>
-            <Link href={`/student/${link.href}`} className="capitalize">
+            <Link href={`/student${link.href}`} className="capitalize">
               {link.label}
             </Link>
           </li>

@@ -20,7 +20,7 @@ def add_assignments():
             "name": body["name"],
             "description": body["description"],
             "id": uuid.uuid4().hex,
-            "uploaded": []  
+            "uploaded": []
         })
         return ApiResponse(200, None).json
 
@@ -29,14 +29,19 @@ def get_assignments():
     email = get_jwt_identity()
     exist_teacher = db.teachers.find_one({"email": email})
     if not exist_teacher:
-        return ApiError(404, "No such user exists").json
+        assignments = db.assignments.find({}, {"_id": 0})
+        response = {
+            "assignments": [assignment for assignment in assignments]
+        }
+
+        return ApiResponse(200, response).json
     else:
         assignments = db.assignments.find({"teacher": exist_teacher["name"]}, {"_id": 0})
         response = {
             "assignments": [assignment for assignment in assignments]
         }
         return ApiResponse(200, response).json
-    
+
 @jwt_required()
 def get_uploaded(assignment_id):
     email = get_jwt_identity()
