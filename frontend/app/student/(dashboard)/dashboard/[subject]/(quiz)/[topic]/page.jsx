@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -110,6 +110,13 @@ function Quiz({ questions }) {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selected, setSelected] = useState(null);
+  const [content,setContent] = useState([]);
+
+  useEffect(() => {
+    let msg = new SpeechSynthesisUtterance();
+    msg.text = "Hello World";
+    window.speechSynthesis.speak(msg);
+  }, [currentIndex]);
 
   function handleSelected(e, index) {
     if (selected == index) {
@@ -151,7 +158,7 @@ function Quiz({ questions }) {
     if (response.success == false) {
       toast.error("Failed to submit answer");
     }
-
+    console.log(response)
     setCurrentIndex((prev) => prev + 1);
     setSelected(null);
   }
@@ -175,7 +182,7 @@ function Quiz({ questions }) {
                 onClick={(e) => handleSelected(e, index)}
               >
                 <span className="text-lg font-semibold mr-[20%]">
-                  {index + 1})
+                  {index + 1}
                 </span>
                 <button
                   className="w-4/6 px-4 py-2 text-lg text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-400"

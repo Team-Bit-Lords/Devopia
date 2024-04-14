@@ -16,21 +16,21 @@ const page = () => {
   };
   return (
     <div className="flex h-[93vh] w-full flex-col">
-      <div className="flex-1 overflow-y-auto bg-slate-300 text-sm leading-6 text-slate-900 shadow-md dark:bg-slate-800 dark:text-slate-300 sm:text-base sm:leading-7">
+      <div className="flex-1 overflow-y-auto bg-slate-300 text-sm leading-6 text-slate-900 shadow-md  sm:text-base sm:leading-7">
         {messages.map((msg, index) => {
           return index % 2 === 0 ? (
-            <div className="flex flex-row px-4 py-8 sm:px-6" key={index}>
+            <div className="flex flex-row-reverse px-4 py-8 sm:px-6" key={index}>
               <img
                 className="mr-2 flex h-8 w-8 rounded-full sm:mr-4"
                 src="https://dummyimage.com/256x256/363536/ffffff&text=U"
               />
 
-              <div className="flex max-w-3xl items-center">
+              <div className="flex max-w-3xl items-center mx-4">
                 <p>{msg}</p>
               </div>
             </div>
           ) : (
-            <div className="flex bg-slate-100 px-4 py-8 dark:bg-slate-900 sm:px-6" key={index}>
+            <div className="flex bg-slate-100 px-4 py-8  sm:px-6" key={index}>
               <img
                 className="mr-2 flex h-8 w-8 rounded-full sm:mr-4"
                 src="https://dummyimage.com/256x256/354ea1/ffffff&text=G"
@@ -45,7 +45,7 @@ const page = () => {
       </div>
 
       {/* Prompt message input */}
-      <form className="flex w-full items-center rounded-b-md border-t border-slate-300 bg-slate-200 p-2 dark:border-slate-700 dark:bg-slate-900">
+      <form className="flex w-full items-center rounded-b-md border-t border-slate-300 bg-slate-200 p-2 ">
         <label htmlFor="chat" className="sr-only">
           Enter your prompt
         </label>
@@ -60,7 +60,7 @@ const page = () => {
               aria-hidden="true"
               viewBox="0 0 24 24"
               strokeWidth="2"
-              stroke="currentColor"
+              stroke="black"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -77,7 +77,7 @@ const page = () => {
           rows="1"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="mx-2 flex min-h-full w-full rounded-md border border-slate-300 bg-slate-50 p-2 text-base text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50 dark:placeholder-slate-400 dark:focus:border-blue-600 dark:focus:ring-blue-600"
+          className="mx-2 flex min-h-full w-full rounded-md border border-slate-300 bg-slate-50 p-2 text-base text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 "
           placeholder="Enter your prompt"
         ></textarea>
         <div>
@@ -92,7 +92,7 @@ const page = () => {
               aria-hidden="true"
               viewBox="0 0 24 24"
               strokeWidth="2"
-              stroke="currentColor"
+              stroke="black"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
