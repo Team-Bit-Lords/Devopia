@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const links = [
-  { href: "/dashboard", label: "DashBoard" },
+  { href: "/subjects", label: "Subjects" },
   { href: "/leaderboard", label: "Leaderboard" },
   { href: "/chat", label: "Chatbot" },
   { href: "/redeem", label: "Redeem" },
@@ -11,7 +11,7 @@ const links = [
 
 const NavLinks = () => {
 
-  
+
   return (
     <ul className="menu text-base-content">
       {links.map((link) => {

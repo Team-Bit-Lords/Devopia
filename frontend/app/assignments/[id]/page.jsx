@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+// import pdf_data from "@/assignment_2.pdf";
 const page = (data) => {
   console.log(data.params.id);
   const [uploaded, setUploaded] = useState([]);
@@ -16,7 +16,7 @@ const page = (data) => {
           },
         }
       );
-      console.log(response.data.body);
+        // console.log(response.data);
       setUploaded(response.data.body.uploaded);
     };
     fetchData();
@@ -47,10 +47,13 @@ const page = (data) => {
       </div>
       {uploaded.length > 0 ? (
         uploaded.map((data, index) => {
-          <div className="flex flex-col gap-2 mt-8" key={index}>
-            <div>{data.name}</div>
-            <iframe src={data.assignment} frameborder="0"></iframe>
-          </div>;
+          return (
+            <div className="flex flex-col gap-2 mt-8" key={index}>
+              <div>{data.name}</div>
+              <p>oqkeofdnwefbweoifhwo</p>
+              {/* <iframe src={pdf_data} frameborder="0"></iframe> */}
+            </div>
+          );
         })
       ) : (
         <div className="flex justify-center items-center text-xl font-semibold mt-24">

@@ -78,20 +78,20 @@ const Page = () => {
   }, []); // Empty dependency array to execute only once on mount
 
   return (
-    <div className="flex flex-col gap-2 overflow-y-scroll h-full">
+    <div className="flex flex-wrap gap-6 overflow-y-scroll h-full">
       {data.map((data, index) => (
         <div
-          className="flex justify-between p-4 bg-white shadow-lg rounded-lg cursor-pointer transition-all duration-500 hover:w-372 hover:h-152"
+          className="flex justify-between p-4 bg-white shadow-lg rounded-lg cursor-pointer transition-all duration-500 w-[500px]"
           key={index}
         >
-          <div className="flex justify-around items-center w-4/6 gap-4">
+          <div className="flex justify-around flex-col items-center">
             <img
               className="h-32 object-contain"
               src={data.link}
               alt={data.name + " Logo"}
             />
             <img
-              className="h-32 object-contain"
+              className="h-16 object-contain"
               src={data.qrcode}
               alt={data.name + " QR Code"}
             />

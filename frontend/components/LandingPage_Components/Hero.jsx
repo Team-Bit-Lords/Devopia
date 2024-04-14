@@ -75,9 +75,10 @@ const Hero = () => {
                 </div>
               </h1>
               <p className="mt-8 text-base text-black sm:text-xl">
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                amet sint. Velit officia consequat duis enim velit mollit.
-                Exercitation veniam consequat.
+                Offer minimal disruption without sacrificing quality, ensuring
+                each student receives the attention they deserve. Promote
+                effective collaboration, engaging every participant. Excellence
+                through commitment.
               </p>
               <div className="mt-10 sm:flex sm:items-center sm:space-x-8">
                 <Link

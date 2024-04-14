@@ -103,6 +103,7 @@ const Page = () => {
 
   return (
     <div className="h-full ">
+      <p className="text-2xl font-bold mb-4">Leaderboard</p>
       <div className="flex justify-between items-center mb-4 mr-4">
         <div>
           Points:{" "}

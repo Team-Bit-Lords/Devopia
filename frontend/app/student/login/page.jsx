@@ -28,8 +28,9 @@ const TeacherLogin = () => {
       console.log(res);
       if (res.data.message === "success") {
         localStorage.setItem("token", res.data.body.token);
+        localStorage.setItem("studentName", res.data.body.name);
         toast.success("Login Success");
-        router.push("/student/dashboard");
+        router.push("/student/subjects");
       } else {
         console.log(res.data.message);
         toast.error(res.data.message);

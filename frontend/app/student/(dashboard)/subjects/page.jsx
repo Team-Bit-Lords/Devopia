@@ -46,16 +46,17 @@ const StudentDashboard = () => {
             <h3 className="text-gray-800 text-2xl mb-4 font-bold">DashBoard</h3>
           </div>
         </div>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap gap-12">
           {courses.map((course, index) => (
             <div onClick={()=>{router.push(`dashboard/${course.name}`)}} key={index} className="w-64">
               <a href="#" title className="block aspect-w-4 aspect-h-3">
                 <img
-                  className="object-cover border-[10px] border-white w-full h-full rounded shadow-lg"
+                  className="object-contain border-[10px] border-white rounded shadow-lg w-[400px] h-[250px]"
                   src={course.image}
                   alt={course.name}
                 />
               </a>
+              <span className="text-xl font-semibold flex justify-center items-center mt-2  ">{course.name}</span>
             </div>
           ))}
         </div>

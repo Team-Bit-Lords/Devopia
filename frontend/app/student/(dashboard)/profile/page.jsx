@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { IoCallOutline } from "react-icons/io5";
 import { IoMailOutline } from "react-icons/io5";
@@ -7,39 +7,76 @@ import { IoMdPerson } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
 import { BsFillCalendarDateFill } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
+import axios from "axios";
 
 const PatientProfile = () => {
   const [modal, setModal] = useState(false);
+  const [tableItems,setTableItems] = useState([]);
 
-  const tableItems = [
-    {
-      subject: "Math",
-      question: "What is the integral of x^2?",
-      yourAnswer: "1/3*x^3 + C",
-      correctAnswer: "1/3*x^3 + C",
-    },
-    {
-      subject: "Physics",
-      question: "What is the second law of thermodynamics?",
-      yourAnswer: "Energy",
-      correctAnswer: "Entropy",
-    },
-    {
-      subject: "Chemistry",
-      question: "What is the chemical formula for table salt?",
-      yourAnswer: "NaCl",
-      correctAnswer: "NaCl",
-    },
-    {
-      subject: "Biology",
-      question: "What is the process by which plants make food called?",
-      yourAnswer: "Chlorophyll",
-      correctAnswer: "Photosynthesis",
-    },
-  ];
+  // const tableItems = [
+  //   {
+  //     subject: "Math",
+  //     question: "What is the integral of x^2?",
+  //     yourAnswer: "1/3*x^3 + C",
+  //     correctAnswer: "1/3*x^3 + C",
+  //   },
+  //   {
+  //     subject: "Physics",
+  //     question: "What is the second law of thermodynamics?",
+  //     yourAnswer: "Energy",
+  //     correctAnswer: "Entropy",
+  //   },
+  //   {
+  //     subject: "Chemistry",
+  //     question: "What is the chemical formula for table salt?",
+  //     yourAnswer: "NaCl",
+  //     correctAnswer: "NaCl",
+  //   },
+  //   {
+  //     subject: "Biology",
+  //     question: "What is the process by which plants make food called?",
+  //     yourAnswer: "Chlorophyll",
+  //     correctAnswer: "Photosynthesis",
+  //   },
+  // ];
+  // let tableItems = [];
+  const quizData = async () => {
+    const token = localStorage.getItem("token");
+    const res = await axios.get(
+      "http://127.0.0.1:5000/api/student/previous_quizzes",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (res.data) {
+      const quizzes = res.data.body.flatMap((subjectItem) =>
+        subjectItem.quiz.map((quizItem) => ({
+          subject: subjectItem.subject,
+          question: quizItem.question,
+          yourAnswer: quizItem.answer,
+          correctAnswer: quizItem.correct,
+        }))
+      );
+      setTableItems(quizzes);
+    }
+    console.log(res);
+  };
+
+  // const tableItems = quiz.map((quizItem) => ({
+  //   subject: data.data.body[0].subject,
+  //   question: quizItem.question,
+  //   yourAnswer: quizItem.answer,
+  //   correctAnswer: quizItem.options[quizItem.correct],
+  // }));
+
+  useEffect(() => {
+    quizData();
+  }, []);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col h-full gap-4">
       <div className="bg-white justify-between flex p-5 h-[170px] rounded-xl">
         <div className="gap-5 flex">
           <div className="">
@@ -51,7 +88,9 @@ const PatientProfile = () => {
           </div>
           <div className="flex gap-1 text-[#01010d] flex-col">
             <div className="flex items-center gap-2">
-              <p className="font-semibold text-xl">Ajay maurya</p>
+              <p className="font-semibold text-xl">
+                {localStorage.getItem("studentName")}
+              </p>
               <div className="bg-gray-100 p-1 rounded-full">
                 <Link href="/">
                   <IoCallOutline />

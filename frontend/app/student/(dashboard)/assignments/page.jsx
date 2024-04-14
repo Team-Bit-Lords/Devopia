@@ -15,6 +15,7 @@ import image from "@/public/assignment.jpeg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
+import toast from "react-hot-toast";
 
 const AssignmentsPage = () => {
   const [assignments, setAssignments] = useState([]);
@@ -77,6 +78,44 @@ const AssignmentsPage = () => {
     } else {
     }
   };
+
+  const handleFileChange = async (e,assignmentName) => {
+    try {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "myCloud");
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/dp9kpxfpa/upload",
+        formData
+      );
+      console.log(response.data.url);
+      // window.open(response.data.url);
+      const token = localStorage.getItem("token");
+      const student_name = localStorage.getItem("studentName");
+      const res = await axios.post(
+        "http://127.0.0.1:5000/api/student/upload_assignment",
+        {
+          name: assignmentName,
+          student_name: student_name,
+          assignment: response.data.url,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // console.log(name, student_name, response.data.url),
+      console.log(res);
+      toast.success("Assignment Uploaded Successfully");
+    } catch (error) {
+      console.log(error);
+    }
+
+    // console.log(formData);
+  };
+
   return (
     <div>
       <div className="flex justify-between">
@@ -205,36 +244,23 @@ const AssignmentsPage = () => {
                   {!pathname || !pathname.includes("teacher") ? (
                     <div>
                       <button
-                        className="btn btn-primary"
                         onClick={() =>
-                          document.getElementById("modal_4").showModal()
+                          document.getElementById("pdfUploadInput").click()
                         }
+                        id="pdfUploadButton"
+                        className="btn btn-primary"
                       >
                         Upload Assignment
                       </button>
-                      <dialog id="modal_4" className="modal">
-                        <div className="modal-box">
-                          <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
-                              ✕
-                            </button>
-                          </form>
-                          <h3 className="text-lg font-bold">
-                            Upload Assignment
-                          </h3>
-                          <div>
-                            <input
-                              type="file"
-                              accept=".pdf"
-                              placeholder="Type here"
-                              className="w-full max-w-lg input input-bordered"
-                              onChange={onChange}
-                              name="subject"
-                            />
-                          </div>
-                        </div>
-                      </dialog>
+                      <input
+                        type="file"
+                        id="pdfUploadInput"
+                        style={{ display: "none" }}
+                        accept=".pdf"
+                        onChange={(e) =>
+                          handleFileChange(e, assignment.name)
+                        }
+                      />
                     </div>
                   ) : (
                     <button

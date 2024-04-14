@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import NavLinks from "./Navlinks";
 import SidebarHeader from "./SidebarHeader";
+import toast from "react-hot-toast";
 
 const Sidebar = () => {
   const router = useRouter();
