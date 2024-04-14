@@ -15,7 +15,7 @@ const StudentDashboard = () => {
     }
 
     try {
-      const res = await axios.get("http://127.0.0.1:5000/api/student/courses", {
+      const res = await axios.get("http://192.168.137.177:5000/api/student/courses", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

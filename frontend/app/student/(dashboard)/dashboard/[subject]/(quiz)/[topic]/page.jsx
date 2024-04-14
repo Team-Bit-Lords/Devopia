@@ -18,7 +18,7 @@ const Page = () => {
 
     const response = await axios
       .post(
-        "http://127.0.0.1:5000/api/student/fetch_specific_quiz",
+        "http://192.168.137.177:5000/api/student/fetch_specific_quiz",
         {
           subject: params.subject,
           topic: params.topic,
@@ -127,41 +127,9 @@ function Quiz({ questions }) {
   async function handleNext() {
     const token = localStorage.getItem("token");
 
-    if (currentIndex === questions.length - 1) {
-      if (questions[currentIndex].correct == selected) {
-        setCorrect((prev) => prev + 1);
-      }
-      if (correct < questions.length) {
-
-        const response = await axios
-        .post(
-          "http://127.0.0.1:5000/api/student/fetch_recommendation",
-          {
-            question: wrong,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then((res) => res.data);
-        
-        setRecommendation(response.body)
-        
-        document.getElementById("my_modal_5").showModal();
-        
-        return;
-      }
-      setRecommendation("Keep up the good work!")
-      document.getElementById("my_modal_5").showModal();
-
-      return
-    }
-
     const response = await axios
       .post(
-        "http://127.0.0.1:5000/api/student/quiz",
+        "http://192.168.137.177:5000/api/student/quiz",
         {
           subject: param.subject,
           topic: param.topic,
@@ -188,20 +156,48 @@ function Quiz({ questions }) {
       toast.error("Failed to submit answer");
     }
 
+    
+    if (currentIndex === questions.length - 1) {
+      if (correct < questions.length) {
+
+        const response = await axios
+        .post(
+          "http://192.168.137.177:5000/api/student/fetch_recommendation",
+          {
+            question: wrong,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => res.data);
+        
+        setRecommendation(response.body)
+        
+        document.getElementById("my_modal_5").showModal();
+        
+        return;
+      }
+      setRecommendation("Keep up the good work!")
+      document.getElementById("my_modal_5").showModal();
+      
+    }
     setCurrentIndex((prev) => prev + 1);
     setSelected(null);
   }
-
+  
   useEffect(() => {
     if (questions.length === 0) {
       return;
     }
     let msg = new SpeechSynthesisUtterance();
     msg.text =
-      "Question is " +
-      questions[currentIndex].text +
-      "Options are" +
-      questions[currentIndex].options.toString();
+    "Question is " +
+    questions[currentIndex].text +
+    "Options are" +
+    questions[currentIndex].options.toString();
     window.speechSynthesis.speak(msg);
     return () => {
       window.speechSynthesis.cancel();

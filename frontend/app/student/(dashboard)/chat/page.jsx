@@ -12,7 +12,7 @@ const page = () => {
   const handle_chat = async (e) => {
     e.preventDefault();
     const response = await axios.post(
-      "http://localhost:5000/api/student/chatbot/history",
+      "http://192.168.137.177:5000/api/student/chatbot/history",
       {
         question: message,
       }

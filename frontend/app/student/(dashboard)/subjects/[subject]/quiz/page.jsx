@@ -18,7 +18,7 @@ const Page = () => {
 
   const handleQuiz = async () => {
     const response = await axios
-      .post("http://127.0.0.1:5000/api/student/fetch_quiz", {
+      .post("http://192.168.137.177:5000/api/student/fetch_quiz", {
         subject: params.subject,
       })
       .then((res) => res.data);

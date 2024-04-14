@@ -39,7 +39,7 @@ const AssignmentsPage = () => {
     const token = localStorage.getItem("token");
     const fetchData = async () => {
       const response = await axios.get(
-        "http://localhost:5000/api/teacher/get_assignments",
+        "http://192.168.137.177:5000/api/teacher/get_assignments",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -59,7 +59,7 @@ const AssignmentsPage = () => {
   const add_assignment = async () => {
     const token = localStorage.getItem("token");
     const response = await axios.post(
-      "http://localhost:5000/api/teacher/add_assignment",
+      "http://192.168.137.177:5000/api/teacher/add_assignment",
       {
         name: formData.topic,
         description: formData.description,
@@ -98,7 +98,7 @@ const AssignmentsPage = () => {
       const token = localStorage.getItem("token");
       const student_name = localStorage.getItem("studentName");
       const res = await axios.post(
-        "http://127.0.0.1:5000/api/student/upload_assignment",
+        "http://192.168.137.177:5000/api/student/upload_assignment",
         {
           name: assignmentName,
           student_name: student_name,

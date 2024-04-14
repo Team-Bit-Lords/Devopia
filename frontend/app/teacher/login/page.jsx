@@ -23,7 +23,7 @@ const TeacherLogin = () => {
     console.log(teacher);
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/teacher/login",
+        "http://192.168.137.177:5000/api/teacher/login",
         teacher
       );
       if (res.data.message === "success") {

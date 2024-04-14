@@ -9,7 +9,7 @@ const page = (data) => {
     const fetchData = async () => {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `http://localhost:5000/api/teacher/get_assignment/${data.params.id}`,
+        `http://192.168.137.177:5000/api/teacher/get_assignment/${data.params.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -8,7 +8,7 @@ const DashBoardPage = () => {
   const getData = async () => {
     const token = localStorage.getItem("token");
     const response = await axios.get(
-      "http://127.0.0.1:5000/api/teacher/get_students",
+      "http://192.168.137.177:5000/api/teacher/get_students",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -78,7 +78,7 @@ const DashBoardPage = () => {
           </a>
         </div>
       </div>
-      <div className="mt-12 shadow-sm border rounded-lg overflow-hidden">
+      <div className="mt-12 shadow-sm border rounded-lg overflow-x-scroll">
         <table className="w-full table-auto text-sm text-left">
           <thead className="bg-gray-50 text-gray-600 font-medium border-b">
             <tr>

@@ -17,7 +17,7 @@ const page = () => {
 
       const response = await axios
         .post(
-          "http://127.0.0.1:5000/api/student/subject_videos",
+          "http://192.168.137.177:5000/api/student/subject_videos",
           {
             subject: params.subject,
           },

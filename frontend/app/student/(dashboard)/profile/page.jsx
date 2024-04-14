@@ -43,7 +43,7 @@ const PatientProfile = () => {
   const quizData = async () => {
     const token = localStorage.getItem("token");
     const res = await axios.get(
-      "http://127.0.0.1:5000/api/student/previous_quizzes",
+      "http://192.168.137.177:5000/api/student/previous_quizzes",
       {
         headers: {
           Authorization: `Bearer ${token}`,

@@ -23,7 +23,7 @@ const AttendancePage = () => {
     console.log(email, date, status)
     const token = localStorage.getItem("token");
     const response = await axios.post(
-      "http://localhost:5000/api/teacher/update_attendance",
+      "http://192.168.137.177:5000/api/teacher/update_attendance",
       {
         email: email,
         date: date,
@@ -43,7 +43,7 @@ const AttendancePage = () => {
     const fetchData = async () => {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        "http://localhost:5000/api/teacher/get_students",
+        "http://192.168.137.177:5000/api/teacher/get_students",
         {
           headers: {
             Authorization: `Bearer ${token}`,

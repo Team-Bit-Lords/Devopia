@@ -17,3 +17,7 @@ app.register_blueprint(router)
 # @app.errorhandler(Exception)
 # def handleException(error):
 #     return ApiError(200, error.__doc__).json
+
+@app.route("/")
+def root():
+    return "Hello, World!"
