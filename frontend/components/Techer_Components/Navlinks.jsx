@@ -4,6 +4,8 @@ const links = [
   { href: "/dashboard", label: "DashBoard" },
   { href: "/assignments", label: "Assignments" },
   { href: "/attendance", label: "Attendance" },
+  { href: "/addquiz", label: "Add a Quiz" },
+
 ];
 
 const NavLinks = () => {

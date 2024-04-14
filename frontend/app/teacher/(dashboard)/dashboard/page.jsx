@@ -1,33 +1,61 @@
-import React from "react";
+'use client';
+import axios from "axios";
+import React, { useEffect,useState } from "react";
 
 const DashBoardPage = () => {
-  const tableItems = [
-    {
-      avatar:
-        "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ",
-      name: "Ajay maurya",
-      email: "ajay@gmail.com",
-      score: "85",
-    },
-    {
-      avatar: "https://randomuser.me/api/portraits/women/79.jpg",
-      name: "rajesh maurya",
-      email: "ajay@gmail.com",
-      score: "75",
-    },
-    {
-      avatar: "https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg",
-      name: "hansal mehta",
-      email: "ajay@gmail.com",
-      score: "95",
-    },
-    {
-      avatar: "https://randomuser.me/api/portraits/men/86.jpg",
-      name: "pranav patil",
-      email: "ajay@gmail.com",
-      score: "45",
-    },
-  ];
+  const [res, setRes] = useState({ data: { body: [] } });
+  const getData = async() => {
+    const token = localStorage.getItem("token");
+    const response = await axios.get(
+      "http://127.0.0.1:5000/api/teacher/get_students",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setRes(response);
+    console.log(response.data.body);
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const tableItems = res.data.body.map((student) => ({
+    name: student.name,
+    email: student.email,
+    class: student.class,
+    points: student.points || 0,
+  }));
+
+  // const tableItems = [
+  //   {
+  //     avatar:
+  //       "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ",
+  //     name: "Ajay maurya",
+  //     email: "ajay@gmail.com",
+  //     score: "85",
+  //   },
+  //   {
+  //     avatar: "https://randomuser.me/api/portraits/women/79.jpg",
+  //     name: "rajesh maurya",
+  //     email: "ajay@gmail.com",
+  //     score: "75",
+  //   },
+  //   {
+  //     avatar: "https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg",
+  //     name: "hansal mehta",
+  //     email: "ajay@gmail.com",
+  //     score: "95",
+  //   },
+  //   {
+  //     avatar: "https://randomuser.me/api/portraits/men/86.jpg",
+  //     name: "pranav patil",
+  //     email: "ajay@gmail.com",
+  //     score: "45",
+  //   },
+  // ];
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 md:px-8">

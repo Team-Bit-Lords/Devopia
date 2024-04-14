@@ -14,5 +14,9 @@ const withPWA = withPWAInit({
   },
 });
 
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    domains: ["live.staticflickr.com", "skill.samsodisha.gov.in"],
+  },
+};
 export default withPWA(nextConfig);

@@ -117,7 +117,8 @@ const AssignmentsPage = () => {
                   <Calendar
                     mode="single"
                     selected={date}
-                    onSelect={(e) => setDate(e.target.value)}
+                    value={date}
+                    onSelect={setDate}
                     disabled={(date) =>
                       date > new Date() || date < new Date("1900-01-01")
                     }
