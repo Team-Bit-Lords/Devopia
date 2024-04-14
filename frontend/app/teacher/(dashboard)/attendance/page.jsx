@@ -18,6 +18,7 @@ const AttendancePage = () => {
   const [date, setDate] = useState(new Date());
   const [status, setStatus] = useState("");
   const [email, setEmail] = useState("");
+  const [updated,setupdated] = useState(false);
   const update_attendance = async () => {
     console.log(email, date, status)
     const token = localStorage.getItem("token");
@@ -35,6 +36,8 @@ const AttendancePage = () => {
       }
     );
     console.log(response.data);
+    setupdated(true);
+
   };
   useEffect(() => {
     const fetchData = async () => {
@@ -69,23 +72,25 @@ const AttendancePage = () => {
             </form>
             <h3 className="font-bold text-lg">Add Attendance</h3>
             <div className="flex flex-col">
-              <div className="flex flex-col gap-2 mt-2">
+              <div className="flex flex-col gap-2 mt-2 ">
                 <span className="label-text">Due Date</span>
                 <Popover>
-                  <PopoverTrigger asChild>
+                  <PopoverTrigger asChild className="">
                     <Button
                       variant={"outline"}
                       className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
+                        "w-[240px] pl-3 text-left font-normal dark:bg-white dark:hover:bg-white dark:hover:text-black",
                         !date && "text-muted-foreground"
                       )}
                     >
                       {date ? format(date, "PPP") : <span>Pick a date</span>}
                       <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+ 
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
+                  <PopoverContent className="w-auto p-2 " align="start">
                     <Calendar
+                    className={"bg-gray-100 "}
                       mode="single"
                       selected={date}
                       value={date}
@@ -117,6 +122,7 @@ const AttendancePage = () => {
               >
                 Update Attendance
               </button>
+              {updated && <div className="text-green-500 mt-2 font-semibold">Attendance Updated!</div>}
             </div>
           </div>
         </dialog>

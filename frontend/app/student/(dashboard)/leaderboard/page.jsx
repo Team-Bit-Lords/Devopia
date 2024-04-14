@@ -127,11 +127,7 @@ const Page = () => {
           <div className="font-semibold">User</div>
           <div
             className="font-semibold text-right"
-            onClick={() => {
-              let msg = new SpeechSynthesisUtterance();
-              msg.text = "Hello World";
-              window.speechSynthesis.speak(msg);
-            }}
+
           >
             Score
           </div>
