@@ -1,10 +1,10 @@
-'use client';
+"use client";
 import axios from "axios";
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const DashBoardPage = () => {
   const [res, setRes] = useState({ data: { body: [] } });
-  const getData = async() => {
+  const getData = async () => {
     const token = localStorage.getItem("token");
     const response = await axios.get(
       "http://127.0.0.1:5000/api/teacher/get_students",
@@ -16,7 +16,7 @@ const DashBoardPage = () => {
     );
     setRes(response);
     console.log(response.data.body);
-  }
+  };
 
   useEffect(() => {
     getData();
@@ -95,14 +95,14 @@ const DashBoardPage = () => {
                   <img src={item.avatar} className="w-10 h-10 rounded-full" />
                   <div>{item.name}</div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {item.email}
+                <td className="px-6 py-4 whitespace-nowrap">{item.email}</td>
+                <td className="px-6 mr-14 flex justify-center items-center py-4 whitespace-nowrap">
+                  {item.score}
                 </td>
-                <td className="px-6 mr-14 flex justify-center items-center py-4 whitespace-nowrap">{item.score}</td>
                 {/* <td className="px-6 py-4 whitespace-nowrap">{item.salary}</td> */}
                 <td className="px-6 whitespace-nowrap">
                   <a
-                    href="javascript:void()"
+                    href={`dashboard/${item.name}`}
                     className="py-2 px-3 font-semibold text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 bg-blue-100 p-2 rounded-lg "
                   >
                     View Profile
