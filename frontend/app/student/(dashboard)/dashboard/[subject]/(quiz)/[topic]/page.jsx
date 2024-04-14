@@ -171,7 +171,9 @@ function Quiz({ questions }) {
     let msg = new SpeechSynthesisUtterance();
     msg.text = "Question is " + questions[currentIndex].text + "Options are" + questions[currentIndex].options.toString();
     window.speechSynthesis.speak(msg);
-    console.log(msg.text)
+    return () => {
+      window.speechSynthesis.cancel();
+    }
   }, [currentIndex])
 
   return (
