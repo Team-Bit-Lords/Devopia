@@ -46,11 +46,15 @@ const page = (data) => {
           </div>
         </dialog>
       </div>
+      <div className="flex flex-wrap gap-6">
       {uploaded.length > 0 ? (
         uploaded.map((data, index) => {
           return (
             <div className="flex flex-col gap-2 mt-8" key={index}>
               <div>{data.name}</div>
+              <div className="w-full h-full">
+                <iframe src={data.assignment} height="100%"></iframe>
+              </div>
               {/* <embed src={pdf_data} width="800px" height="2100px" /> */}
             </div>
           );
@@ -59,7 +63,7 @@ const page = (data) => {
         <div className="flex justify-center items-center text-xl font-semibold mt-24">
           No Assignments Uploaded
         </div>
-      )}
+      )}</div>
     </div>
   );
 };

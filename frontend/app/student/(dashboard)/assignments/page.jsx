@@ -81,16 +81,20 @@ const AssignmentsPage = () => {
 
   const handleFileChange = async (e,assignmentName) => {
     try {
-      const file = e.target.files[0];
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", "myCloud");
+      const data = new FormData();
+      data.append("file", e.target.files[0]);
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dp9kpxfpa/upload",
-        formData
+        "https://api.pinata.cloud/pinning/pinFileToIPFS",
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_PINATA_JWT}`,
+          },
+        }
       );
-      console.log(response.data.url);
-      // window.open(response.data.url);
+      console.log(response);
+      const url = `moccasin-accepted-python-473.mypinata.cloud/ipfs/${response.data.IpfsHash}`;
+      console.log(url);
       const token = localStorage.getItem("token");
       const student_name = localStorage.getItem("studentName");
       const res = await axios.post(
@@ -98,17 +102,18 @@ const AssignmentsPage = () => {
         {
           name: assignmentName,
           student_name: student_name,
-          assignment: response.data.url,
+          assignment: url,
         },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
-      );
-      // console.log(name, student_name, response.data.url),
+      )
       console.log(res);
-      toast.success("Assignment Uploaded Successfully");
+      if(res.data.message=="success"){
+        toast.success("Assignment Uploaded Successfully");
+      }
     } catch (error) {
       console.log(error);
     }
