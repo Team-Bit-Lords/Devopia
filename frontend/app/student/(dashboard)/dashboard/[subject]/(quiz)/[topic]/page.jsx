@@ -182,7 +182,7 @@ function Quiz({ questions }) {
                 onClick={(e) => handleSelected(e, index)}
               >
                 <span className="text-lg font-semibold mr-[20%]">
-                  {index + 1})
+                  {index + 1}
                 </span>
                 <button
                   className="w-4/6 px-4 py-2 text-lg text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-400"
