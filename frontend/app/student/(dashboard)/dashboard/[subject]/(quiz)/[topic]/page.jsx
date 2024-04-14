@@ -111,6 +111,8 @@ function Quiz({ questions }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selected, setSelected] = useState(null);
   const [correct, setCorrect] = useState(0);
+  const [wrong, setWrong] = useState([]);
+  const [recommendation, setRecommendation] = useState("");
 
   function handleSelected(e, index) {
     if (selected == index) {
@@ -123,15 +125,39 @@ function Quiz({ questions }) {
   }
 
   async function handleNext() {
-    if (currentIndex === questions.length - 1) {
-      toast.success(
-        `Quiz completed! You scored ${correct} out of ${questions.length}`
-      );
-      router.back();
-      return;
-    }
-
     const token = localStorage.getItem("token");
+
+    if (currentIndex === questions.length - 1) {
+      if (questions[currentIndex].correct == selected) {
+        setCorrect((prev) => prev + 1);
+      }
+      if (correct < questions.length) {
+
+        const response = await axios
+        .post(
+          "http://127.0.0.1:5000/api/student/fetch_recommendation",
+          {
+            question: wrong,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => res.data);
+        
+        setRecommendation(response.body)
+        
+        document.getElementById("my_modal_5").showModal();
+        
+        return;
+      }
+      setRecommendation("Keep up the good work!")
+      document.getElementById("my_modal_5").showModal();
+
+      return
+    }
 
     const response = await axios
       .post(
@@ -154,6 +180,8 @@ function Quiz({ questions }) {
 
     if (questions[currentIndex].correct == selected) {
       setCorrect((prev) => prev + 1);
+    } else {
+      setWrong((prev) => [...prev, questions[currentIndex].text]);
     }
 
     if (response.success == false) {
@@ -169,15 +197,35 @@ function Quiz({ questions }) {
       return;
     }
     let msg = new SpeechSynthesisUtterance();
-    msg.text = "Question is " + questions[currentIndex].text + "Options are" + questions[currentIndex].options.toString();
+    msg.text =
+      "Question is " +
+      questions[currentIndex].text +
+      "Options are" +
+      questions[currentIndex].options.toString();
     window.speechSynthesis.speak(msg);
     return () => {
       window.speechSynthesis.cancel();
-    }
-  }, [currentIndex])
+    };
+  }, [currentIndex]);
 
   return (
     <div className="flex flex-col h-full p-6 mt-6 bg-white rounded-lg shadow-xl">
+      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <h3 className="text-4xl font-bold">Result & Recommendation</h3>
+          <p className="py-4 mt-8 text-2xl">
+            {`Quiz completed! You scored ${correct} out of ${questions.length}`}
+          </p>
+          <p className="py-4 mt-4" dangerouslySetInnerHTML={{__html: `Recommendation ${recommendation}`}}></p>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button onClick={() => router.back()} className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+
       <div>
         <p>
           <span className="text-3xl font-bold">Q{currentIndex + 1}.</span>{" "}

@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Chart from "./charts.jsx";
 
 const DashBoardPage = () => {
   const [res, setRes] = useState({ data: { body: [] } });
@@ -65,8 +66,7 @@ const DashBoardPage = () => {
             Students
           </h3>
           <p className="text-gray-600 mt-2">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+            Information About all the students in the database
           </p>
         </div>
         <div className="mt-3 md:mt-0">
@@ -78,19 +78,21 @@ const DashBoardPage = () => {
           </a>
         </div>
       </div>
-      <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
+      <div className="mt-12 shadow-sm border rounded-lg overflow-hidden">
         <table className="w-full table-auto text-sm text-left">
           <thead className="bg-gray-50 text-gray-600 font-medium border-b">
             <tr>
               <th className="py-3 px-6">Student name</th>
               <th className="py-3 px-6">Student Email</th>
+              <th className="py-3 px-6">Standard</th>
+
               <th className="py-3 px-6">Overall Points</th>
               <th className="py-3 mr-5 px-6">Action</th>
             </tr>
           </thead>
-          <tbody className="text-gray-600 bg-white divide-y">
+          <tbody className="text-gray-600 bg-white divide-y w-full">
             {tableItems.map((item, idx) => (
-              <tr key={idx}>
+              <tr key={idx} className=" align-middle">
                 <td className="flex items-center gap-x-3 py-3 px-6 whitespace-nowrap">
                   <img src={item.avatar} className="w-10 h-10 rounded-full" />
                   <div>{item.name}</div>
@@ -99,6 +101,10 @@ const DashBoardPage = () => {
                 <td className="px-6 mr-14 flex justify-center items-center py-4 whitespace-nowrap">
                   {item.score}
                 </td>
+                <td className="px-6  py-4 whitespace-nowrap">10</td>
+
+                <td className="px-6  py-4 whitespace-nowrap">{item.score || 75}</td>
+
                 {/* <td className="px-6 py-4 whitespace-nowrap">{item.salary}</td> */}
                 <td className="px-6 whitespace-nowrap">
                   <a
@@ -112,6 +118,7 @@ const DashBoardPage = () => {
             ))}
           </tbody>
         </table>
+        <div className="mt-4"><Chart /></div>
       </div>
     </div>
   );
