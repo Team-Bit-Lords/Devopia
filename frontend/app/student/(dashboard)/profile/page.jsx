@@ -197,7 +197,7 @@ const PatientProfile = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       {item.subject}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4 ">
                       {item.question}
                     </td>
                     <td
