@@ -8,11 +8,11 @@ const layout = ({ children }) => {
       <div className="drawer-content">
         <label
           htmlFor="my-drawer-2"
-          className="drawer-button lg:hidden fixed top-6 right-6"
+          className="fixed drawer-button lg:hidden top-6 right-6"
         >
           <FaBarsStaggered className="w-8 h-8 text-primary" />
         </label>
-        <div className="bg-base-200 px-8 py-12 min-h-screen">{children}</div>
+        <div className="min-h-screen px-8 py-12 bg-base-200">{children}</div>
       </div>
       <div className="drawer-side">
         <label

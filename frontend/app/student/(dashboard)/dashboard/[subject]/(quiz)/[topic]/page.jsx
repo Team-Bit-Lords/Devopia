@@ -212,7 +212,7 @@ function Quiz({ questions }) {
           <p className="py-4 mt-8 text-2xl">
             {`Quiz completed! You scored ${correct} out of ${questions.length}`}
           </p>
-          <p className="py-4 mt-4" dangerouslySetInnerHTML={{__html: `Recommendation ${recommendation}`}}></p>
+          <p className="py-4 mt-4" dangerouslySetInnerHTML={{__html: `Recommendation ${recommendation.split('*').join('')}`}}></p>
           <div className="modal-action">
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}

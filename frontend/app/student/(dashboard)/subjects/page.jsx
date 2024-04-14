@@ -40,10 +40,10 @@ const StudentDashboard = () => {
 
   return (
     <div>
-      <div className="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div className="max-w-screen-xl px-4 md:px-8">
         <div className="items-start justify-between py-4 border-b md:flex">
           <div>
-            <h3 className="text-gray-800 text-2xl mb-4 font-bold">DashBoard</h3>
+            <h3 className="text-gray-800 text-2xl font-bold">DashBoard</h3>
           </div>
         </div>
         <div className="flex flex-wrap gap-12">
