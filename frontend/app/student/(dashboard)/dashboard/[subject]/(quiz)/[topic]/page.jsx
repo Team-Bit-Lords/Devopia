@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -110,6 +110,7 @@ function Quiz({ questions }) {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selected, setSelected] = useState(null);
+  const [correct, setCorrect] = useState(0);
 
   function handleSelected(e, index) {
     if (selected == index) {
@@ -123,6 +124,9 @@ function Quiz({ questions }) {
 
   async function handleNext() {
     if (currentIndex === questions.length - 1) {
+      toast.success(
+        `Quiz completed! You scored ${correct} out of ${questions.length}`
+      );
       router.back();
       return;
     }
@@ -148,6 +152,10 @@ function Quiz({ questions }) {
       )
       .then((res) => res.data);
 
+    if (questions[currentIndex].correct == selected) {
+      setCorrect((prev) => prev + 1);
+    }
+
     if (response.success == false) {
       toast.error("Failed to submit answer");
     }
@@ -155,6 +163,16 @@ function Quiz({ questions }) {
     setCurrentIndex((prev) => prev + 1);
     setSelected(null);
   }
+
+  useEffect(() => {
+    if (questions.length === 0) {
+      return;
+    }
+    let msg = new SpeechSynthesisUtterance();
+    msg.text = "Question is " + questions[currentIndex].text + "Options are" + questions[currentIndex].options.toString();
+    window.speechSynthesis.speak(msg);
+    console.log(msg.text)
+  }, [currentIndex])
 
   return (
     <div className="flex flex-col h-full p-6 mt-6 bg-white rounded-lg shadow-xl">
