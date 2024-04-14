@@ -18,7 +18,7 @@ def get_recommendation():
 
     question = request.get_json()['question']
     question = f"The following questions are answered wrong by a student: {question} \
-        Provide the recommended topics for the student to study."
+        Provide the recommended topics for the student to study for detailed but concise topics."
 
     answer = llm.invoke(question)
 
