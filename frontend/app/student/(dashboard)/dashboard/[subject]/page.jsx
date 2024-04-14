@@ -73,7 +73,7 @@ const page = () => {
                 {courseData.map((course, index) => (
                   <div
                     key={index}
-                    className={`flex gap-8 sm:h-full lg: md:col-span-1 md:h-[100%] lg:h-full rounded-lg items-center justify-start lg:w-full  ${
+                    className={`flex gap-8 sm:h-full lg: md:col-span-1 md:h-[100%] lg:h-auto rounded-lg items-center justify-start lg:w-full  ${
                       selectedVideoIndex === index
                         ? "bg-white shadow-xl border-2"
                         : "bg-gray-300 shadow-md"
