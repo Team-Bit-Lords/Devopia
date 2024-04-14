@@ -45,7 +45,7 @@ const TeacherLogin = () => {
   return (
     <section class="bg-white">
       <div class="grid grid-cols-1 lg:grid-cols-2 h-screen">
-        <div class="relative flex items-end px-4 pb-10 pt-60 sm:pb-16 md:justify-center lg:pb-24 bg-gray-50 sm:px-6 lg:px-8">
+        <div class="relative hidden sm:flex items-end px-4 pb-10 pt-60 sm:pb-16 md:justify-center lg:pb-24 bg-gray-50 sm:px-6 lg:px-8">
           <div class="absolute inset-0">
             <img
               class="object-cover object-top w-full h-full"
