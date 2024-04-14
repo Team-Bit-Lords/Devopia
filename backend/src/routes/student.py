@@ -12,6 +12,7 @@ from ..controllers.students.chatbot.history import history_chatbot
 # from ..controllers.students.chatbot.science import science_chatbot
 from ..controllers.students.attendance import attendance
 from ..controllers.students.assignments import upload_assignments
+from ..controllers.students.recommendation import get_recommendation
 
 student = Blueprint("student", __name__, url_prefix="/student")
 
@@ -31,4 +32,5 @@ student.add_url_rule("/attendance", view_func=attendance, methods=["GET"])
 student.add_url_rule("/upload_assignment", view_func=upload_assignments, methods=["POST"])
 student.add_url_rule("/fetch_quiz", view_func=get_subject_quiz, methods=["POST"])
 student.add_url_rule("/fetch_specific_quiz", view_func=get_specific_quiz, methods=["POST"])
+student.add_url_rule("/fetch_recommendation", view_func=get_recommendation, methods=["POST"])
 
