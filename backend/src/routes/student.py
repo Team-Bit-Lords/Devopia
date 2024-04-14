@@ -4,7 +4,7 @@ from ..controllers.students.signup import signup
 from ..controllers.students.courses import courses_name
 from ..controllers.students.subject_wise import subject_wise_videos, subject_wise_quizzes
 from ..controllers.students.quiz_submit import quiz_submit
-from ..controllers.students.fetch_quiz import previous_quizzes, get_subject_quiz
+from ..controllers.students.fetch_quiz import previous_quizzes, get_subject_quiz, get_specific_quiz
 # from ..controllers.students.chatbot.english import english_chatbot
 # from ..controllers.students.chatbot.geography import geography_chatbot
 from ..controllers.students.chatbot.history import history_chatbot
